@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Check if door can be opened
   function canOpenDoor(day) {
     const today = new Date()
-    const isDecember = today.getMonth() === 10
+    const isDecember = today.getMonth() === 11 // December is month 11 (0-indexed)
     return isDecember && day <= today.getDate()
   }
 
