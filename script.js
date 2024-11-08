@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalTitle = document.getElementById("modal-title")
   const modalContent = document.getElementById("modal-content")
   const closeBtn = document.querySelector(".close")
+  const doorSound = document.getElementById("doorSound")
 
   // reset calendar
   document
@@ -112,6 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
       showModal(day)
       return
     }
+
+    // Play door sound
+    doorSound.currentTime = 0 // Reset sound to start
+    doorSound.play().catch((error) => console.log("Sound play failed:", error))
 
     // Add opening animation
     door.classList.add("opening")
