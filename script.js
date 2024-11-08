@@ -14,12 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function resetCalendar() {
     // Clear localStorage
     localStorage.removeItem("openedDoors")
+    // localStorage.removeItem("shuffledNumbers") // Clear shuffled numbers
 
     // Reset all doors
     const doors = document.querySelectorAll(".door")
     doors.forEach((door) => {
       door.classList.remove("opened", "opening")
     })
+
+    initializeCalendar() // Regenerate numbers
   }
 
   // Content for each day
@@ -58,26 +61,28 @@ document.addEventListener("DOMContentLoaded", () => {
     return array
   }
 
+  // Update initializeCalendar function
   function initializeCalendar() {
-    // Create array of numbers 1-24
-    const numbers = Array.from({ length: 24 }, (_, i) => i + 1)
+    // Try to get stored shuffled numbers
+    let shuffledNumbers = JSON.parse(localStorage.getItem("shuffledNumbers"))
 
-    // Shuffle the numbers
-    const shuffledNumbers = shuffleArray([...numbers])
+    // Generate new numbers if none stored
+    if (!shuffledNumbers) {
+      const numbers = Array.from({ length: 24 }, (_, i) => i + 1)
+      shuffledNumbers = shuffleArray([...numbers])
+      // Save to localStorage
+      localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers))
+    }
 
-    // Get all doors
+    // Assign numbers to doors
     const doors = document.querySelectorAll(".door:not(.empty)")
-
-    // Assign shuffled numbers to doors
     doors.forEach((door, index) => {
       const number = shuffledNumbers[index]
       door.textContent = number
-      door.dataset.day = number // Store original day number
+      door.dataset.day = number
 
-      // Add click handler with correct content mapping
       door.addEventListener("click", () => {
-        const day = parseInt(door.dataset.day)
-        handleDoorClick(door, day)
+        handleDoorClick(door, number)
       })
     })
   }
