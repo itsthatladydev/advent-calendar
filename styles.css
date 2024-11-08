@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
+
 body {
     margin: 0;
     height: 100vh;
@@ -451,3 +453,12 @@ body {
         font-size: calc(8px + 1vw);
     }
 }
+
+.festive {
+    font-family: 'Mountains of Christmas', cursive;
+    color: #ff6347; /* Tomato color */
+    margin: 0;
+    text-align: center;
+    font-size: 1.3em;
+}
+
