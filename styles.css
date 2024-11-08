@@ -1,3 +1,57 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #1a4a2e, #0c4a36);
+    overflow: hidden;
+    position: relative;
+}
+
+.snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.snowfall::before,
+.snowfall::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(4px 4px at 100px 50px, #fff 50%, transparent),
+        radial-gradient(6px 6px at 200px 150px, #fff 50%, transparent),
+        radial-gradient(3px 3px at 300px 250px, #fff 50%, transparent),
+        radial-gradient(4px 4px at 400px 350px, #fff 50%, transparent),
+        radial-gradient(6px 6px at 500px 100px, #fff 50%, transparent),
+        radial-gradient(3px 3px at 50px 200px, #fff 50%, transparent),
+        radial-gradient(4px 4px at 150px 300px, #fff 50%, transparent),
+        radial-gradient(6px 6px at 250px 400px, #fff 50%, transparent),
+        radial-gradient(3px 3px at 350px 500px, #fff 50%, transparent);
+    background-size: 650px 650px;
+    animation: snowfall 8s linear infinite;
+    opacity: 0.5;
+}
+
+.snowfall::after {
+    background-position: 100px 100px;
+    animation-duration: 15s;
+    animation-delay: -5s;
+    opacity: 0.3;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-650px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -5,12 +59,15 @@
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background: #0c4a36;  /* Dark green */
+    background: rgba(12, 74, 54, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     position: relative;
     background-image: radial-gradient(#ffffff33 1px, transparent 1px);
     background-size: 20px 20px;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .door {
