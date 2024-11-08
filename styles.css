@@ -6,6 +6,7 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    cursor: url('images/snowman.png') 16 16, auto;
 }
 
 .snowfall {
@@ -131,12 +132,13 @@ body {
 .door.active {
     background-color: #ffcc00; /* Example color for active doors */
     color: #fff; /* Example text color for active doors */
-    cursor: pointer;
+    cursor: url('images/giftbox.png') 16 16, auto;
   }
   
   .door.disabled {
+    opacity: 0.5;
     background-color: #ccc;
-    cursor: not-allowed;
+    cursor: url('images/candycanes.png') 16 16, auto;
   }
 
 .door.opening {
@@ -261,11 +263,6 @@ body {
         transform: scale(1);
         opacity: 1;
     }
-}
-
-.door.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 .music-control {
