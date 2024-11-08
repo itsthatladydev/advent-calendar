@@ -5,6 +5,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalContent = document.getElementById("modal-content")
   const closeBtn = document.querySelector(".close")
 
+  // reset calendar
+  document
+    .getElementById("resetCalendar")
+    .addEventListener("click", resetCalendar)
+
+  function resetCalendar() {
+    // Clear localStorage
+    localStorage.removeItem("openedDoors")
+
+    // Reset all doors
+    const doors = document.querySelectorAll(".door")
+    doors.forEach((door) => {
+      door.classList.remove("opened", "opening")
+    })
+  }
+
   // Content for each day
   const adventContent = {
     1: "Start decorating for Christmas! 🎄 Coding tip: Keep your functions pure.",
