@@ -99,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (openedDoors.includes(day)) {
         door.classList.add("opened")
       }
-      //   if (!canOpenDoor(day)) {
-      //     door.classList.add("disabled")
-      //   }
+      if (!canOpenDoor(day)) {
+        door.classList.add("disabled")
+      }
 
       door.addEventListener("click", () => handleDoorClick(door, day))
     })
@@ -109,6 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle door click
   function handleDoorClick(door, day) {
+    if (!canOpenDoor(day)) {
+      return // Exit if door cannot be opened
+    }
+
     if (door.classList.contains("opened")) {
       showModal(day)
       return
