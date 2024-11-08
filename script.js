@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Attach click event using `dayNumber` to match displayed number
         door.addEventListener("click", () => handleDoorClick(door, dayNumber));
     });
-}
+  }
 
   // Check if door can be opened
   function canOpenDoor(day) {
@@ -149,11 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
             door.classList.add("opened");
             saveOpenedDoor(day);
             showModal(day); // Use `day` to display correct content from `adventContent`
+            showConfetti(); // Show confetti when a door is opened
         },
         { once: true }
     );
-}
-
+  }
 
   // Show modal
   function showModal(day) {
@@ -202,16 +202,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gingerbread = document.getElementById("gingerbread");
 
-// Function to make gingerbread man run across the screen
-function runGingerbread() {
-    gingerbread.classList.add("gingerbread-running"); // Start the animation
-    
-    // Remove the animation class after it ends to reset it
-    setTimeout(() => {
-        gingerbread.classList.remove("gingerbread-running");
-    }, 5000); // Match the animation duration (5s)
-}
+  // Function to make gingerbread man run across the screen
+  function runGingerbread() {
+      gingerbread.classList.add("gingerbread-running"); // Start the animation
+      
+      // Remove the animation class after it ends to reset it
+      setTimeout(() => {
+          gingerbread.classList.remove("gingerbread-running");
+      }, 5000); // Match the animation duration (5s)
+  }
 
-// Trigger the animation periodically (e.g., every 20 seconds)
-setInterval(runGingerbread, 20000); // Runs every 20 seconds
+  // Trigger the animation periodically (e.g., every 20 seconds)
+  setInterval(runGingerbread, 20000); // Runs every 20 seconds
+
+  // Function to show confetti
+  function showConfetti() {
+    const colors = ['#ff0000', '#00ff00', '#ffd700']; // Red, green, gold
+    const confettiContainer = document.getElementById('confetti-container');
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = '50vw';
+        confetti.style.top = '50vh';
+        confetti.style.setProperty('--x', Math.random());
+        confetti.style.setProperty('--y', Math.random());
+        confettiContainer.appendChild(confetti);
+    }
+    setTimeout(() => {
+        confettiContainer.innerHTML = '';
+    }, 1000);
+  }
 })
