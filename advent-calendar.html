@@ -10,7 +10,6 @@
 <body>
     <header class="calendar-header">
         <h1>Code & Cheer Advent Calendar</h1>
-        <p class="subtitle">24 Days of Festive Coding Fun 🎄</p>
     </header>
     <audio id="holidayMusic" loop>
         <source src="holiday-music.mp3" type="audio/mp3">
@@ -20,42 +19,45 @@
         <i class="fas fa-music"></i>
     </button>
     <div class="snowfall"></div>
-    <div class="calendar-grid">
-        <div class="door">1</div>
-        <div class="door">2</div>
-        <div class="door">3</div>
-        <div class="door">4</div>
-        <div class="door">5</div>
-        <div class="door">6</div>
-        <div class="door">7</div>
-        <div class="door">8</div>
-        <div class="door">9</div>
-        <div class="door">10</div>
-        <div class="door">11</div>
-        <div class="door">12</div>
-        <div class="door">13</div>
-        <div class="door">14</div>
-        <div class="door">15</div>
-        <div class="door">16</div>
-        <div class="door">17</div>
-        <div class="door">18</div>
-        <div class="door">19</div>
-        <div class="door">20</div>
-        <div class="door">21</div>
-        <div class="door">22</div>
-        <div class="door">23</div>
-        <div class="door">24</div>
-        <div class="door empty"></div>
-    </div>
-    <!-- reset button for calendar -->
-    <button id="resetCalendar" class="reset-button">
-    <i class="fas fa-redo"></i> Reset Calendar
-    </button>
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-content"></div>
+    <div class="calendar-wrapper">
+        <!-- Your calendar grid here -->
+        <div class="calendar-grid">
+            <div class="door">1</div>
+            <div class="door">2</div>
+            <div class="door">3</div>
+            <div class="door">4</div>
+            <div class="door">5</div>
+            <div class="door">6</div>
+            <div class="door">7</div>
+            <div class="door">8</div>
+            <div class="door">9</div>
+            <div class="door">10</div>
+            <div class="door">11</div>
+            <div class="door">12</div>
+            <div class="door">13</div>
+            <div class="door">14</div>
+            <div class="door">15</div>
+            <div class="door">16</div>
+            <div class="door">17</div>
+            <div class="door">18</div>
+            <div class="door">19</div>
+            <div class="door">20</div>
+            <div class="door">21</div>
+            <div class="door">22</div>
+            <div class="door">23</div>
+            <div class="door">24</div>
+            <div class="door empty"></div>
+        </div>
+        <!-- reset button for calendar -->
+        <button id="resetCalendar" class="reset-button">
+        <i class="fas fa-redo"></i> Reset Calendar
+        </button>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <div id="modal-content"></div>
+            </div>
         </div>
     </div>
     <footer class="calendar-footer">
