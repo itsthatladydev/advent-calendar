@@ -83,10 +83,22 @@ body {
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease-in-out;
     box-shadow: 
         inset 0 0 15px rgba(255,255,255,0.2),
         0 4px 8px rgba(0,0,0,0.2);
+    transform-origin: left;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.door::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.1);
+    transition: opacity 0.8s ease;
 }
 
 .door:hover {
@@ -102,6 +114,28 @@ body {
     box-shadow: 
         inset 0 0 10px rgba(0,0,0,0.2),
         0 2px 4px rgba(0,0,0,0.1);
+}
+
+.door.opening {
+    animation: doorOpen 0.4s ease-in-out forwards;
+}
+
+.door.opened {
+    background: var(--hover-red);
+    transform: scale(0.95);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+@keyframes doorOpen {
+    0% {
+        transform: perspective(1000px) rotateY(0);
+    }
+    70% {
+        transform: perspective(1000px) rotateY(80deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0) scale(0.95);
+    }
 }
 
 .empty {
@@ -124,36 +158,91 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
     position: relative;
-    background: #fff;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
     margin: 15% auto;
-    padding: 20px;
-    width: 70%;
+    padding: 25px;
+    width: 90%;
     max-width: 500px;
-    border-radius: 10px;
+    border-radius: 15px;
+    border: 3px solid #c0392b;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 50px rgba(192, 57, 43, 0.1);
+    animation: modalOpen 0.4s ease-out;
+}
+
+.modal-content::before {
+    content: '❄️';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 24px;
+}
+
+.modal-content::after {
+    content: '🎄';
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 24px;
 }
 
 .close {
     position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 28px;
+    right: 15px;
+    top: 15px;
+    font-size: 24px;
+    color: #c0392b;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    transform: rotate(90deg);
+    color: #e74c3c;
+}
+
+#modal-title {
+    color: #c0392b;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#modal-content {
+    color: #2c3e50;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@keyframes modalOpen {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .door.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-.door.opened {
-    background: var(--hover-red);
-    transform: scale(0.95);
 }
 
 .music-control {

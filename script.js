@@ -60,16 +60,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle door click
   function handleDoorClick(door, day) {
-    // Don't allow opening future doors
-    // if (!canOpenDoor(day)) {
-    //     return;
-    // }
+    if (door.classList.contains("opened")) {
+      showModal(day)
+      return
+    }
 
-    saveOpenedDoor(day)
-    door.classList.add("opened")
+    // Add opening animation
+    door.classList.add("opening")
 
-    // Show modal with content
-    showModal(day)
+    // Wait for animation to complete
+    door.addEventListener(
+      "animationend",
+      () => {
+        door.classList.remove("opening")
+        door.classList.add("opened")
+        saveOpenedDoor(day)
+        showModal(day)
+      },
+      { once: true }
+    )
   }
 
   // Show modal
