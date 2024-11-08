@@ -1,0 +1,100 @@
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #0c4a36;  /* Dark green */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background-image: radial-gradient(#ffffff33 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.door {
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, #d42c2c, #a61c1c);
+    border: 2px solid #e74c3c;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset 0 0 15px rgba(255,255,255,0.2),
+        0 4px 8px rgba(0,0,0,0.2);
+}
+
+.door:hover {
+    transform: scale(1.05) rotate(2deg);
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    box-shadow: 
+        inset 0 0 20px rgba(255,255,255,0.3),
+        0 6px 12px rgba(0,0,0,0.3);
+}
+
+.door:active {
+    transform: scale(0.95);
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.2),
+        0 2px 4px rgba(0,0,0,0.1);
+}
+
+.empty {
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    border-color: #2c3e50;
+    cursor: default;
+    opacity: 0.7;
+}
+
+.empty:hover {
+    transform: none;
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    box-shadow: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+}
+
+.modal-content {
+    position: relative;
+    background: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.door.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.door.opened {
+    background: var(--hover-red);
+    transform: scale(0.95);
+}
