@@ -397,6 +397,38 @@ body {
     animation: pulse 1.5s ease infinite;
 }
 
+#gingerbread {
+    position: fixed;
+    bottom: 0;
+    left: -100px; /* Start off-screen */
+    width: 50px;
+    height: auto;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Define the running animation */
+@keyframes runAcross {
+    0% {
+        left: -100px; /* Start off-screen */
+        opacity: 1;   /* Fade in as it starts */
+    }
+    50% {
+        bottom: 50px; /* Small bounce as he moves */
+    }
+    100% {
+        left: 100vw; /* End off-screen on the right */
+        opacity: 0;  /* Fade out as it ends */
+    }
+}
+
+/* Apply the animation */
+.gingerbread-running {
+    animation: runAcross 5s linear;
+}
+
+
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }

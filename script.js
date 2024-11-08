@@ -199,4 +199,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     isPlaying = !isPlaying
   })
+
+  const gingerbread = document.getElementById("gingerbread");
+
+// Function to make gingerbread man run across the screen
+function runGingerbread() {
+    gingerbread.classList.add("gingerbread-running"); // Start the animation
+    
+    // Remove the animation class after it ends to reset it
+    setTimeout(() => {
+        gingerbread.classList.remove("gingerbread-running");
+    }, 5000); // Match the animation duration (5s)
+}
+
+// Trigger the animation periodically (e.g., every 20 seconds)
+setInterval(runGingerbread, 20000); // Runs every 20 seconds
 })
