@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!shuffledNumbers) {
         const numbers = Array.from({ length: 24 }, (_, i) => i + 1);
         shuffledNumbers = shuffleArray([...numbers]);
-        // Save to localStorage
         localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers));
     }
 
@@ -79,17 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
     doors.forEach((door, index) => {
         const dayNumber = shuffledNumbers[index];
         door.textContent = dayNumber;
-        door.dataset.day = dayNumber;
+        door.dataset.day = dayNumber; // Ensure `data-day` is set correctly
 
-        // Check if door can be opened based on the current date
+        // Only make the door active if it's before or equal to today's date
         if (canOpenDoor(dayNumber)) {
-            door.classList.add("active"); // Add 'active' class for styling
-            door.classList.remove("disabled"); // Ensure door is not disabled
+            door.classList.add("active");
+            door.classList.remove("disabled");
         } else {
-            door.classList.add("disabled"); // Disable if not yet unlockable
+            door.classList.add("disabled");
         }
 
-        // Attach click event to handle door opening
+        // Attach click event using `dayNumber` to match displayed number
         door.addEventListener("click", () => handleDoorClick(door, dayNumber));
     });
 }
@@ -121,34 +120,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle door click
   function handleDoorClick(door, day) {
-    if (!canOpenDoor(day)) {
-      return // Exit if door cannot be opened
+    // Only proceed if the door is active and can be opened based on the date
+    if (!door.classList.contains("active") || !canOpenDoor(day)) {
+        return; // Exit if the door cannot be opened
     }
 
     if (door.classList.contains("opened")) {
-      showModal(day)
-      return
+        showModal(day); // Show modal with the correct content
+        return;
     }
 
-    // Play door sound
-    doorSound.currentTime = 0 // Reset sound to start
-    doorSound.play().catch((error) => console.log("Sound play failed:", error))
+    // Play door sound and open door animation
+    doorSound.currentTime = 0;
+    doorSound.play().catch((error) => console.log("Sound play failed:", error));
+    door.classList.add("opening");
 
-    // Add opening animation
-    door.classList.add("opening")
-
-    // Wait for animation to complete
+    // Add opened class after animation, then show modal with correct content
     door.addEventListener(
-      "animationend",
-      () => {
-        door.classList.remove("opening")
-        door.classList.add("opened")
-        saveOpenedDoor(day)
-        showModal(day)
-      },
-      { once: true }
-    )
-  }
+        "animationend",
+        () => {
+            door.classList.remove("opening");
+            door.classList.add("opened");
+            saveOpenedDoor(day);
+            showModal(day); // Use `day` to display correct content from `adventContent`
+        },
+        { once: true }
+    );
+}
+
 
   // Show modal
   function showModal(day) {
