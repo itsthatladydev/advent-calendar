@@ -133,6 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Play door sound and open door animation
     doorSound.currentTime = 0;
     doorSound.play().catch((error) => console.log("Sound play failed:", error));
+
+    // Stop the sound after 2 seconds
+    setTimeout(() => {
+      doorSound.pause();
+    }, 2000);
+
     door.classList.add("opening");
 
     // Add opened class after animation, then show modal with correct content
