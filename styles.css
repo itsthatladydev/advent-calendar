@@ -288,8 +288,9 @@ body {
 
 .reset-button {
     position: fixed;
-    bottom: 20px;
+    bottom: calc(2rem + 80px); /* Adjust based on footer height */
     right: 20px;
+    z-index: 100;
     padding: 10px 20px;
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -362,6 +363,16 @@ body {
 .footer-content i.fa-snowflake {
     color: #fff;
     animation: spin 8s linear infinite;
+}
+
+.footer-content a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer-content a:hover {
+    opacity: 0.8;
 }
 
 .signature {

@@ -49,6 +49,38 @@ document.addEventListener("DOMContentLoaded", () => {
     24: "Gift to Future You: Write a letter with your hopes and dreams for next year.",
   }
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
+  }
+
+  function initializeCalendar() {
+    // Create array of numbers 1-24
+    const numbers = Array.from({ length: 24 }, (_, i) => i + 1)
+
+    // Shuffle the numbers
+    const shuffledNumbers = shuffleArray([...numbers])
+
+    // Get all doors
+    const doors = document.querySelectorAll(".door:not(.empty)")
+
+    // Assign shuffled numbers to doors
+    doors.forEach((door, index) => {
+      const number = shuffledNumbers[index]
+      door.textContent = number
+      door.dataset.day = number // Store original day number
+
+      // Add click handler with correct content mapping
+      door.addEventListener("click", () => {
+        const day = parseInt(door.dataset.day)
+        handleDoorClick(door, day)
+      })
+    })
+  }
+
   // Check if door can be opened
   function canOpenDoor(day) {
     const today = new Date()
@@ -125,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize
   initDoors()
+  initializeCalendar()
 
   const music = document.getElementById("holidayMusic")
   const musicToggle = document.getElementById("musicToggle")
