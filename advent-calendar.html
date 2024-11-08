@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advent Calendar</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <audio id="holidayMusic" loop>
+        <source src="holiday-music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggle" class="music-control">
+        <i class="fas fa-music"></i>
+    </button>
     <div class="snowfall"></div>
     <div class="calendar-grid">
         <div class="door">1</div>
