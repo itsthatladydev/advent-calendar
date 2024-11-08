@@ -64,33 +64,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // Update initializeCalendar function
   function initializeCalendar() {
     // Try to get stored shuffled numbers
-    let shuffledNumbers = JSON.parse(localStorage.getItem("shuffledNumbers"))
+    let shuffledNumbers = JSON.parse(localStorage.getItem("shuffledNumbers"));
 
     // Generate new numbers if none stored
     if (!shuffledNumbers) {
-      const numbers = Array.from({ length: 24 }, (_, i) => i + 1)
-      shuffledNumbers = shuffleArray([...numbers])
-      // Save to localStorage
-      localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers))
+        const numbers = Array.from({ length: 24 }, (_, i) => i + 1);
+        shuffledNumbers = shuffleArray([...numbers]);
+        // Save to localStorage
+        localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers));
     }
 
-    // Assign numbers to doors
-    const doors = document.querySelectorAll(".door:not(.empty)")
+    // Assign numbers to doors based on shuffled order
+    const doors = document.querySelectorAll(".door:not(.empty)");
     doors.forEach((door, index) => {
-      const number = shuffledNumbers[index]
-      door.textContent = number
-      door.dataset.day = number
+        const dayNumber = shuffledNumbers[index];
+        door.textContent = dayNumber;
+        door.dataset.day = dayNumber;
 
-      door.addEventListener("click", () => {
-        handleDoorClick(door, number)
-      })
-    })
-  }
+        // Check if door can be opened based on the current date
+        if (canOpenDoor(dayNumber)) {
+            door.classList.add("active"); // Add 'active' class for styling
+            door.classList.remove("disabled"); // Ensure door is not disabled
+        } else {
+            door.classList.add("disabled"); // Disable if not yet unlockable
+        }
+
+        // Attach click event to handle door opening
+        door.addEventListener("click", () => handleDoorClick(door, dayNumber));
+    });
+}
 
   // Check if door can be opened
   function canOpenDoor(day) {
     const today = new Date()
-    const isDecember = today.getMonth() === 11
+    const isDecember = today.getMonth() === 10
     return isDecember && day <= today.getDate()
   }
 
