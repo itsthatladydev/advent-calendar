@@ -27,30 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Content for each day
   const adventContent = {
-    1: "Skill-Boosting Tip: Powerful Git command of the day - 'git rebase' to keep commits clean!",
-    2: "JavaScript Mini Challenge: Solve a puzzle like finding the most frequent character in a string.",
-    3: "Productivity Tip: Learn a useful VS Code shortcut to speed up your workflow.",
-    4: "Python Puzzle: Sort a list of dictionaries by key in a single line.",
-    5: "GitHub Copilot Hack: Discover a hidden feature to maximize your coding efficiency.",
-    6: "Motivational Quote: 'Do it scared!' Reflect on your tech journey and set a new goal.",
-    7: "Stress-Busting Tip: Take a screen break every 20 minutes and do a quick stretch!",
-    8: "Imposter Syndrome Reminder: Feel the fear and code anyway - you’re doing great!",
-    9: "Self-Care Checklist: Hydrate, take eye breaks, and remember to enjoy the process!",
-    10: "Plan B Moment: Watch an inspiring story of someone who transitioned into tech.",
-    11: "Holiday Coding Meme: Enjoy a funny coding meme to lighten your day!",
-    12: "CSS Snow Animation: Create a simple falling snow effect with CSS - festive and fun!",
-    13: "JavaScript Tree Generator: Create a holiday tree with ornaments using DOM manipulation.",
-    14: "Holiday Coding Playlist: Listen to a playlist of lo-fi and holiday tunes while coding.",
-    15: "Virtual Dev Trivia: Test your tech history knowledge with a quick trivia quiz.",
-    16: "Resume Optimization Tip: Learn how to highlight project impact effectively.",
-    17: "LinkedIn Makeover: Refresh your profile to attract recruiters.",
-    18: "Interview Prep Mini Guide: Get tips for tackling technical interview questions.",
-    19: "GitHub Profile Tips: Showcase your best projects on your GitHub profile.",
-    20: "Networking Icebreaker: Sample LinkedIn message for connecting with industry peers.",
-    21: "Reflection Prompt: Celebrate your small wins and review your 2024 career goals.",
-    22: "Mini Project Idea: Build a fun project, like a simple game or holiday-themed app.",
-    23: "Code Confession: Share a funny coding mistake - we’ve all been there!",
-    24: "Gift to Future You: Write a letter with your hopes and dreams for next year.",
+    1: "JavaScript: Snowfall Animation – Create a simple snowfall effect on a webpage with CSS and JavaScript.",
+    2: "Python: Holiday Greeting Card – Use Python to generate a text-based holiday greeting card with a festive ASCII border.",
+    3: "CSS: Blinking Holiday Lights – Use CSS animations to create a string of blinking holiday lights.",
+    4: "JavaScript: Countdown Timer to Christmas – Build a countdown timer that counts down to Christmas Day.",
+    5: "Python: Elf Name Generator – Generate a holiday-themed 'elf name' based on a user's input.",
+    6: "CSS & HTML: Festive Button Animation – Design a button that unwraps or glows when clicked.",
+    7: "JavaScript: Random Gingerbread Recipe Display – Show a random gingerbread or holiday cookie recipe with a click.",
+    8: "Python: Holiday Quiz Game – A simple console-based quiz with holiday-themed questions and answers.",
+    9: "JavaScript: Digital Snow Globe – Create a snow globe effect with JavaScript where snow falls within a 'globe' circle on the page.",
+    10: "CSS: Santa Hat Filter – Use CSS to add a Santa hat filter to images, applying it to any image on hover.",
+    11: "Python: Gift Exchange Matcher – Write a program that pairs people for a holiday gift exchange.",
+    12: "JavaScript: Interactive Tree Decorator – Let users drag ornaments onto a tree on a webpage.",
+    13: "CSS: Snowy Text Effect – Create a CSS-only text effect where 'snow' appears to fall over the letters.",
+    14: "Python: Holiday Budget Calculator – A program that helps users calculate their holiday shopping budget.",
+    15: "JavaScript: Festive Confetti Explosion – Add a confetti effect to a webpage that triggers when a button is clicked.",
+    16: "Python: Holiday Themed Mad Libs – Create a Mad Libs-style game with a holiday twist.",
+    17: "CSS: Gingerbread Man Hover Animation – Make a gingerbread man 'dance' when the user hovers over him using CSS animations.",
+    18: "JavaScript: Random Holiday Joke – Display a random holiday joke each time a button is clicked.",
+    19: "Python: Naughty or Nice List – A program that randomly decides if a user is on the 'Naughty' or 'Nice' list based on their name.",
+    20: "JavaScript: Snowflake Creator – Let users draw unique snowflakes by clicking and dragging on a canvas element.",
+    21: "CSS & HTML: Holiday Wreath Loader – Create a loading animation that resembles a wreath spinning or a blinking holiday wreath.",
+    22: "Python: Secret Santa Assignment – Generate randomized Secret Santa assignments for a group, making sure no one gets themselves.",
+    23: "JavaScript: Holiday Soundboard – Play different holiday sounds (like jingle bells or a 'Ho ho ho!') when buttons are clicked.",
+    24: "Python: Virtual Holiday Card – A Python script that generates a holiday card message with a colorful ASCII border or small animation."
   }
 
   function shuffleArray(array) {
@@ -64,33 +64,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // Update initializeCalendar function
   function initializeCalendar() {
     // Try to get stored shuffled numbers
-    let shuffledNumbers = JSON.parse(localStorage.getItem("shuffledNumbers"))
+    let shuffledNumbers = JSON.parse(localStorage.getItem("shuffledNumbers"));
 
     // Generate new numbers if none stored
     if (!shuffledNumbers) {
-      const numbers = Array.from({ length: 24 }, (_, i) => i + 1)
-      shuffledNumbers = shuffleArray([...numbers])
-      // Save to localStorage
-      localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers))
+        const numbers = Array.from({ length: 24 }, (_, i) => i + 1);
+        shuffledNumbers = shuffleArray([...numbers]);
+        localStorage.setItem("shuffledNumbers", JSON.stringify(shuffledNumbers));
     }
 
-    // Assign numbers to doors
-    const doors = document.querySelectorAll(".door:not(.empty)")
+    // Assign numbers to doors based on shuffled order
+    const doors = document.querySelectorAll(".door:not(.empty)");
     doors.forEach((door, index) => {
-      const number = shuffledNumbers[index]
-      door.textContent = number
-      door.dataset.day = number
+        const dayNumber = shuffledNumbers[index];
+        door.textContent = dayNumber;
+        door.dataset.day = dayNumber; // Ensure `data-day` is set correctly
 
-      door.addEventListener("click", () => {
-        handleDoorClick(door, number)
-      })
-    })
+        // Only make the door active if it's before or equal to today's date
+        if (canOpenDoor(dayNumber)) {
+            door.classList.add("active");
+            door.classList.remove("disabled");
+        } else {
+            door.classList.add("disabled");
+        }
+
+        // Attach click event using `dayNumber` to match displayed number
+        door.addEventListener("click", () => handleDoorClick(door, dayNumber));
+    });
   }
 
   // Check if door can be opened
   function canOpenDoor(day) {
     const today = new Date()
-    const isDecember = today.getMonth() === 11
+    const isDecember = today.getMonth() === 11 // December is month 11 (0-indexed)
     return isDecember && day <= today.getDate()
   }
 
@@ -114,33 +120,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle door click
   function handleDoorClick(door, day) {
-    if (!canOpenDoor(day)) {
-      return // Exit if door cannot be opened
+    // Only proceed if the door is active and can be opened based on the date
+    if (!door.classList.contains("active") || !canOpenDoor(day)) {
+        return; // Exit if the door cannot be opened
     }
 
     if (door.classList.contains("opened")) {
-      showModal(day)
-      return
+        showModal(day); // Show modal with the correct content
+        return;
     }
 
-    // Play door sound
-    doorSound.currentTime = 0 // Reset sound to start
-    doorSound.play().catch((error) => console.log("Sound play failed:", error))
+    // Play door sound and open door animation
+    doorSound.currentTime = 0;
+    doorSound.play().catch((error) => console.log("Sound play failed:", error));
 
-    // Add opening animation
-    door.classList.add("opening")
+    // Stop the sound after 2 seconds
+    setTimeout(() => {
+      doorSound.pause();
+    }, 2000);
 
-    // Wait for animation to complete
+    door.classList.add("opening");
+
+    // Add opened class after animation, then show modal with correct content
     door.addEventListener(
-      "animationend",
-      () => {
-        door.classList.remove("opening")
-        door.classList.add("opened")
-        saveOpenedDoor(day)
-        showModal(day)
-      },
-      { once: true }
-    )
+        "animationend",
+        () => {
+            door.classList.remove("opening");
+            door.classList.add("opened");
+            saveOpenedDoor(day);
+            showModal(day); // Use `day` to display correct content from `adventContent`
+            showConfetti(); // Show confetti when a door is opened
+        },
+        { once: true }
+    );
   }
 
   // Show modal
@@ -187,4 +199,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     isPlaying = !isPlaying
   })
+
+  const gingerbread = document.getElementById("gingerbread");
+
+  // Function to make gingerbread man run across the screen
+  function runGingerbread() {
+      gingerbread.classList.add("gingerbread-running"); // Start the animation
+      
+      // Remove the animation class after it ends to reset it
+      setTimeout(() => {
+          gingerbread.classList.remove("gingerbread-running");
+      }, 5000); // Match the animation duration (5s)
+  }
+
+  // Trigger the animation periodically (e.g., every 20 seconds)
+  setInterval(runGingerbread, 20000); // Runs every 20 seconds
+
+  // Function to show confetti
+  function showConfetti() {
+    const colors = ['#ff0000', '#00ff00', '#ffd700']; // Red, green, gold
+    const confettiContainer = document.getElementById('confetti-container');
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = '50vw';
+        confetti.style.top = '50vh';
+        confetti.style.setProperty('--x', Math.random());
+        confetti.style.setProperty('--y', Math.random());
+        confettiContainer.appendChild(confetti);
+    }
+    setTimeout(() => {
+        confettiContainer.innerHTML = '';
+    }, 1000);
+  }
 })

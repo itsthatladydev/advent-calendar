@@ -19,21 +19,22 @@
 <body>
     <header class="calendar-header">
         <h1>Code & Cheer Advent Calendar</h1>
+        <p class="festive">🎄 24 days of festive coding projects 🎄</p>
     </header>
     <!-- holiday music -->
     <audio id="holidayMusic" loop>
-        <source src="holiday-music.mp3" type="audio/mp3">
+        <source src="/audio/holiday-music.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
         <!-- door open -->
     <audio id="doorSound" preload="auto">
-        <source src="door-open.mp3" type="audio/mp3">
+        <source src="/audio/door-open.mp3" type="audio/mp3">
     </audio>
     <button id="musicToggle" class="music-control">
         <i class="fas fa-music"></i>
     </button>
     <div class="snowfall"></div>
-    <div class="calendar-wrapper">
+    <img src="images/gingerbreadman.png" alt="Gingerbread Man" id="gingerbread" />
         <!-- Your calendar grid here -->
         <div class="calendar-grid">
             <div class="door">1</div>
@@ -63,9 +64,9 @@
             <div class="door empty"></div>
         </div>
         <!-- reset button for calendar -->
-        <!-- <button id="resetCalendar" class="reset-button">
+        <button id="resetCalendar" class="reset-button">
         <i class="fas fa-redo"></i> Reset Calendar
-        </button> -->
+        </button>
         <div id="modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -74,11 +75,13 @@
             </div>
         </div>
     </div>
+    <div id="confetti-container"></div>
     <footer class="calendar-footer">
         <div class="footer-content">
             <i class="fas fa-snowflake"></i>
             <p>Happy Coding and Happy Holidays! 🎄</p>
-            <p class="signature">Made with <i class="fas fa-heart pulse"></i> by <a href="https://github.com/LadyKerr" target="_blank">LadyKerr</a> & <a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a> 🎁 Music + sound effects from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6038">Pixabay</a> </p>
+            <p class="signature">Made with <i class="fas fa-heart pulse"></i> by <a href="https://github.com/LadyKerr" target="_blank">LadyKerr</a> & <a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a> 🎄</p>
+            <p><a href="credits.html">Site Credits</a></p>
             <i class="fas fa-snowflake"></i>
         </div>
     </footer>
