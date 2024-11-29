@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     1: "Create a simple snowfall effect on a webpage with CSS and JavaScript.",
     2: "Use Python to generate a text-based holiday greeting card with a festive ASCII border.",
     3: "Use CSS animations to create a string of blinking holiday lights.",
-    4: "Use Javascript to build a countdown timer that counts down to Christmas Day.",
+    4: "Use JavaScript to build a countdown timer that counts down to Christmas Day.",
     5: "Generate a holiday-themed 'elf name' based on a user's input with Python.",
     6: "Design a button that unwraps or glows when clicked.",
     7: "Use Javascript to show a random gingerbread or holiday cookie recipe with a click.",
