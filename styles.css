@@ -72,7 +72,7 @@ body {
     width: min(80vw, 550px);
     aspect-ratio: 1;
     margin: 0px auto;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     padding: 20px;
     background: rgba(12, 74, 54, 0.9);
     border-radius: 10px;
@@ -321,7 +321,7 @@ body {
 .calendar-header {
     text-align: center;
     padding: 1vh 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     /* background: rgba(255, 255, 255, 0.1); */
     backdrop-filter: blur(5px);
     /* border-bottom: 2px solid rgba(255, 255, 255, 0.2); */
