@@ -93,24 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    // Check if door can be opened
+   // Check if door can be opened
   function canOpenDoor(day) {
     const today = new Date()
-    const month = today.getMonth()
-    const date = today.getDate()
-    
-    // Allow November 30th or December dates
-    const isValidMonth = month === 10 || month === 11 // 10 for November, 11 for December
-    
-    if (month === 10) {
-      // Only allow November 30th
-      return date === 30 && day === 1
-    } else if (month === 11) {
-      // December - normal advent calendar behavior
-      return day <= date
-    }
-    
-    return false
+    const isDecember = today.getMonth() === 11 // December is month 11 (0-indexed)
+    return isDecember && day <= today.getDate()
   }
 
   // Initialize doors
