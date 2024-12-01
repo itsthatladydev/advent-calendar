@@ -1,0 +1,78 @@
+.light-string {
+  display: flex;
+  gap: 40px; /* Increased gap for string visibility */
+  padding: 20px;
+  background: #2c3e50;
+  align-items: center;
+  position: relative;
+}
+
+.light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+  position: relative;
+  z-index: 2;
+}
+
+.light:nth-child(4n+1) {
+  background: #f1c40f;
+  animation-delay: 0s;
+}
+
+.light:nth-child(4n+2) {
+  background: #e74c3c;
+  animation-delay: 0.4s;
+}
+
+.light:nth-child(4n+3) {
+  background: #2ecc71;
+  animation-delay: 0.8s;
+}
+
+.light:nth-child(4n+4) {
+  background: #3498db;
+  animation-delay: 1.2s;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+/* Add string effect */
+.light::before {
+  content: '';
+  position: absolute;
+  width: 40px; /* Length of string */
+  height: 2px; /* Thickness of string */
+  background: #777;
+  left: 20px; /* Position after the light */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Remove string from last light */
+.light:last-child::before {
+  display: none;
+}
+
+/* Optional: Add top string connection */
+.light::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: #777;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+}
