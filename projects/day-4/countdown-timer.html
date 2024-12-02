@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Christmas Countdown 🎄</title>
+    <style>
+        body {
+            background-color: #1a472a;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #c41e3a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #timer {
+            font-size: 2.5em;
+            margin: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .christmas-tree {
+            font-size: 50px;
+            margin: 20px;
+        }
+        .timezone-select {
+            margin: 20px;
+            font-size: 1.2em;
+        }
+        .timezone-select select {
+            margin-left: 10px;
+            padding: 5px;
+            font-size: 0.9em;
+            background-color: #fff;
+            border: 2px solid #1a472a;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="christmas-tree">🎄</div>
+        <h1>Time Until Christmas! 🎅</h1>
+        <div class="timezone-select">
+            <label for="timezone">Select your timezone:</label>
+            <select id="timezone" onchange="updateTimer()"></select>
+        </div>
+        <div id="timer"></div>
+    </div>
+    <script>
+        // Populate timezone dropdown
+        function populateTimezones() {
+            const timezones = Intl.supportedValuesOf('timeZone');
+            const select = document.getElementById('timezone');
+            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            timezones.forEach(timezone => {
+                const option = document.createElement('option');
+                option.value = timezone;
+                option.text = timezone;
+                option.selected = timezone === userTimezone;
+                select.appendChild(option);
+            });
+        }
+
+        function updateTimer() {
+            const selectedTimezone = document.getElementById('timezone').value;
+            const now = new Date();
+            
+            // Set Christmas date for selected timezone
+            const christmas = new Date(new Date().getFullYear(), 11, 25);
+            
+            // Convert dates to selected timezone
+            const nowInTimezone = new Date(now.toLocaleString('en-US', { timeZone: selectedTimezone }));
+            const christmasInTimezone = new Date(christmas.toLocaleString('en-US', { timeZone: selectedTimezone }));
+            
+            if (nowInTimezone > christmasInTimezone) {
+                christmas.setFullYear(christmas.getFullYear() + 1);
+            }
+            
+            const diff = christmasInTimezone - nowInTimezone;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('timer').innerHTML = 
+                `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds<br>` +
+                `<small>(in ${selectedTimezone})</small>`;
+            
+            // Add snow effect
+            if (!document.querySelector('.snowflake')) {
+                createSnowflake();
+            }
+        }
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.cssText = `
+                position: fixed;
+                top: -10px;
+                left: ${Math.random() * 100}vw;
+                opacity: 0.6;
+                font-size: 20px;
+                animation: fall ${Math.random() * 3 + 2}s linear infinite;
+            `;
+            document.body.appendChild(snowflake);
+            
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+
+        setInterval(updateTimer, 1000);
+        setInterval(createSnowflake, 300);
+
+        // Add falling snow animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        populateTimezones();
+    </script>
+</body>
+</html>
