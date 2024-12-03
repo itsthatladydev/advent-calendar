@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Update button wrapper */
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .magic-button {
+      position: relative;
+      padding: 15px 30px;
+      background: transparent;
+      border: 2px solid #00ff88;
+      border-radius: 25px;
+      color: #00ff88;
+      font-size: 18px;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .magic-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #00ff88;
+      transform: translateX(-100%);
+      transition: 0.3s;
+      z-index: -1;
+    }
+
+    .magic-button:hover::before {
+      transform: translateX(0);
+    }
+
+    .magic-button:hover {
+      color: #1a1a1a;
+      box-shadow: 0 0 30px #00ff88;
+    }
+
+    .magic-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Update unwrap button base */
+    .unwrap-button {
+      position: relative;
+      padding: 15px 40px;
+      background: #fff;
+      border: none;
+      border-radius: 25px;
+      color: #333;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+      z-index: 1;
+    }
+
+    /* Bow loops */
+    .unwrap-button::before,
+    .unwrap-button::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #ff6b6b;
+      border-radius: 50% 50% 0 50%;
+      z-index: -1;
+      transition: all 0.5s ease;
+    }
+
+    /* Left bow loop */
+    .unwrap-button::before {
+      left: -5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    /* Right bow loop */
+    .unwrap-button::after {
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    /* Center knot */
+    .unwrap-button .bow {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    /* Ribbon tails */
+    .unwrap-button .ribbon-left,
+    .unwrap-button .ribbon-right {
+      position: absolute;
+      width: 30px;
+      height: 60px;
+      background: #ff6b6b;
+      bottom: -30px;
+      z-index: -1;
+    }
+
+    .unwrap-button .ribbon-left {
+      left: 40%;
+      transform: rotate(-15deg);
+    }
+
+    .unwrap-button .ribbon-right {
+      right: 40%;
+      transform: rotate(15deg);
+    }
+
+    /* Hover animations */
+    .unwrap-button:hover::before {
+      transform: translateY(-50%) rotate(-90deg) scale(0);
+      opacity: 0;
+    }
+
+    .unwrap-button:hover::after {
+      transform: translateY(-50%) rotate(90deg) scale(0);
+      opacity: 0;
+    }
+
+    .unwrap-button:hover .bow {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+
+    .unwrap-button:hover .ribbon-left {
+      transform: translateX(-100%) rotate(-45deg);
+      opacity: 0;
+    }
+
+    .unwrap-button:hover .ribbon-right {
+      transform: translateX(100%) rotate(45deg);
+      opacity: 0;
+    }
+
+    /* Button content */
+    .unwrap-button span {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-wrapper">
+    <button class="magic-button">Click Me</button>
+    <button class="unwrap-button">
+      <div class="bow"></div>
+      <div class="ribbon-left"></div>
+      <div class="ribbon-right"></div>
+      <span>Unwrap Me</span>
+    </button>
+  </div>
+</body>
+</html>
