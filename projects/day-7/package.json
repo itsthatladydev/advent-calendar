@@ -1,0 +1,20 @@
+{
+  "name": "day-7",
+  "version": "1.0.0",
+  "description": "A Node.js project using Express framework.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "openai": "^4.76.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "dotenv": "^16.4.7"
+  },
+  "author": "LadyKerr",
+  "license": "MIT"
+}
