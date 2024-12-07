@@ -9,7 +9,11 @@
 <body>
     <main>
         <h1>🍪 Holiday Recipes 🍰</h1>
-        <button>click for randomness</button>
+        <button id="generateBtn">Generate Holiday Cookie Recipe</button>
+        <div id="recipeContainer" class="recipe-container hidden">
+            <div id="loadingSpinner" class="loading hidden">Generating recipe...</div>
+            <div id="recipeContent"></div>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>
