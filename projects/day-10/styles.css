@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.image-container {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.santa-hat {
+    position: absolute;
+    top: -20%;
+    right: 25%;
+    width: 50% !important;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.image-container:hover .santa-hat {
+    opacity: 1;
+}
+
+#imageUpload {
+    display: block;
+    margin: 20px auto;
+}
