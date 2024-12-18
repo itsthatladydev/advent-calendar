@@ -133,3 +133,38 @@
   transform: scale(1.05);
   background: linear-gradient(45deg, #FFA500, #FFD700);
 }
+
+.gingerbread-man {
+    width: 100px;
+    margin: 40px auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.gingerbread-man img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.gingerbread-man:hover img {
+    animation: dance 1s infinite;
+}
+
+@keyframes dance {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(10deg) scale(1.1);
+    }
+    50% {
+        transform: rotate(0deg) scale(1);
+    }
+    75% {
+        transform: rotate(-10deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
