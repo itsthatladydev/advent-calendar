@@ -18,12 +18,12 @@
     left: 0;
     pointer-events: none;
     background-image: 
-      radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+      radial-gradient(4px 4px at 20% 30%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
       radial-gradient(3px 3px at 40% 70%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
-      radial-gradient(2px 2px at 60% 40%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
-      radial-gradient(4px 4px at 80% 10%, rgba(255, 255, 255, 0.7) 50%, transparent 50%);
+      radial-gradient(4px 4px at 60% 40%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+      radial-gradient(4px 6px at 80% 10%, rgba(255, 255, 255, 0.7) 50%, transparent 50%);
     background-size: 550px 550px, 350px 350px, 450px 450px, 550px 550px;
-    animation: snow-fall 5s linear infinite;
+    animation: snow-fall 3s linear infinite;
     z-index: 2;
   }
   
@@ -167,4 +167,33 @@
     100% {
         transform: rotate(0deg) scale(1);
     }
+}
+
+.joke-section {
+    text-align: center;
+    margin: 40px auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+#joke-btn {
+    background: linear-gradient(45deg, #FF4D4D, #FF8C8C);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#joke-btn:hover {
+    transform: scale(1.05);
+}
+
+#joke-text {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    min-height: 50px;
 }
